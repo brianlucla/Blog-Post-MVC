@@ -1,12 +1,12 @@
 const userInput = document.getElementById('username');
-const passInput = document.getElementById('password')
+const passInput = document.getElementById('password');
 const submitEl = document.getElementById('signup-btn');
 
 const signupHandler = async function(event){
   event.preventDefault();
 
   const response = await fetch('/api/user', {
-    method: POST,
+    method: 'POST',
     body: JSON.stringify({
       username: userInput.value,
       password: passInput.value,

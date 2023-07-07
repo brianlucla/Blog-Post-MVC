@@ -3,12 +3,12 @@ const { Blogpost } = require('../../models');
 
 router.post('/', async (req, res)=>{
   try {
-    const blogpostData = await Blogpost.create({
+    const blogPostData = await Blogpost.create({
       blog_title:req.body.blog_title,
       blog_content:req.body.blog_content,
       user_id:req.session.user_id,
     });
-    res.json(blogpostData);
+    res.json(blogPostData);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -27,7 +27,7 @@ router.put('/:id', async(req, res)=>{
 
 router.delete('/:id', async(req, res)=>{
   try {
-    const blogpostData = await Blogpost.destroy({
+    const blogPostData = await Blogpost.destroy({
       where:{id:req.params.id},
     })
   } catch (error) {

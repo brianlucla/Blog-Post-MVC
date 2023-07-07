@@ -3,15 +3,15 @@ const { Blogpost } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
-    const blogData = await Blogpost.findAll({
+    const blogPostData = await Blogpost.findAll({
       where:{
         user_id: req.session.user_id,
       },
     });
-    const blogs = blogData.map((blog)=>{
+    const blogs = blogPostData.map((blog)=>{
       blog.get({plain:true});
     });
-    res.render('dashboard', blogs); 
+    res.render('user-posts', { layout:'dashboard', blogs }); 
   } catch (error) {
     res.status(500).json(error);
   }
