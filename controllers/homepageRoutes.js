@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Blogpost, User } = require('../models');
+const { Blogpost, Comment, User } = require('../models');
 
 router.get('/', async(req, res) => {
   // find all posts from all users
@@ -22,7 +22,7 @@ router.get('/blogpost/:id', async(req, res)=>{
   try {
     const postData = await Blogpost.findByPk({
       where:{id:req.params.id},
-      include:[User],
+      include:[User, {model: Comment, include:[User]}],
     });
 
     const post = postData.get({plain:true});
