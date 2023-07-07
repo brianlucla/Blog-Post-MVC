@@ -8,18 +8,20 @@
   {{!-- <link rel="stylesheet" href="/css/style.css"> --}}
 </head>
 
+
 <body>
-  <nav class="navbar">
-    <ul>
-      <li class="li-inline nav-item"><a href="/"></a>Home</li>
-      <li class="li-inline nav-item"><a href="/dashboard"></a>Dashboard</li>
-      <li class="li-inline nav-item"><a href="/login"></a>Login</li>
-      <li class="li-inline nav-item"><a href="#" id="logout"></a>Logout</li>
-    </ul>
-  </nav>
   <header>
     <h1>LeBlog James</h1>
   </header>
+  <nav class="navbar">
+    <ul>
+      <li class="li-inline nav-item"><a type="button" href="/">Home</a></li>
+      <li class="li-inline nav-item"><a type="button" href="/dashboard">Dashboard</a></li>
+      <li class="li-inline nav-item"><a type="button" href="/login">Login</a></li>
+      <li class="li-inline nav-item"><a type="button" href="#" id="logout"></a>Logout</li>
+    </ul>
+  </nav>
+  
   <main>
     {{{body}}}
   </main>

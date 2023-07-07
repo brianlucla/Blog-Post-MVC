@@ -5,13 +5,13 @@ router.get('/', async (req, res) => {
   try {
     const blogPostData = await Blogpost.findAll({
       where:{
-        user_id: req.session.user_id,
+        user_id: req.session.userId,
       },
     });
     const blogs = blogPostData.map((blog)=>{
       blog.get({plain:true});
     });
-    res.render('user-posts', { layout:'dashboard', blogs }); 
+    res.render('user-posts', { layout:'dashboard', blogs}); 
   } catch (error) {
     res.status(500).json(error);
   }

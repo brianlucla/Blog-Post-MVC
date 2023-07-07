@@ -6,7 +6,18 @@ router.post('/', async (req, res)=>{
     const blogPostData = await Blogpost.create({
       blog_title:req.body.blog_title,
       blog_content:req.body.blog_content,
-      user_id:req.session.user_id,
+      user_id:req.session.userId,
+    });
+    res.json(blogPostData);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const blogPostData = await Blogpost.findbyPk({
+      where:{id:req.params.id}
     });
     res.json(blogPostData);
   } catch (error) {
@@ -16,10 +27,10 @@ router.post('/', async (req, res)=>{
 
 router.put('/:id', async(req, res)=>{
   try {
-    const blogPostData = await Blogpost.update({
-      blog_content:req.body,
-      where:{id:req.params.id},
-    })
+    const blogPostData = await Blogpost.update(
+      {blog_content: req.body.blog_content}, 
+      {where:{id:req.params.id}},
+    )
   } catch (error) {
     res.status(500).json(error);
   }
@@ -27,9 +38,9 @@ router.put('/:id', async(req, res)=>{
 
 router.delete('/:id', async(req, res)=>{
   try {
-    const blogPostData = await Blogpost.destroy({
+    const [blogPostData] = await Blogpost.destroy({
       where:{id:req.params.id},
-    })
+    });
   } catch (error) {
     res.status(500).json(error);
   }

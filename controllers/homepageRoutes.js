@@ -11,7 +11,7 @@ router.get('/', async(req, res) => {
    const blogs = blogPostData.map((blog)=>{
     blogs.get({plain:true});
    });
-   res.render('all-posts', { blogs });
+   res.render('all-posts', { layout: 'main', blogs });
    
   } catch (error) {
     res.status(500).json(error);
