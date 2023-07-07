@@ -39,6 +39,6 @@ app.use(express.json());
 app.use(require("./controllers"));
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => app.listen(PORT))
   .catch((err) => console.error(err));
