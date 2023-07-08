@@ -1,29 +1,35 @@
-const router = require('express').Router();
-const { Blogpost } = require('../models');
+const router = require("express").Router();
+const { Blogpost } = require("../models");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const blogPostData = await Blogpost.findAll({
-      where:{
+      where: {
         user_id: req.session.userId,
       },
     });
-    const blogs = blogPostData.map((blog)=>{
-      blog.get({plain:true});
+    const blogs = blogPostData.map((blog) => {
+      blog.get({ plain: true });
     });
-    res.render('user-posts', { layout:'dashboard', blogs}); 
+    res.render("user-posts", { layout: "dashboard", blogs });
   } catch (error) {
-    res.status(500).json(error);
+    res.redirect("login");
   }
 });
 
-router.get('/newpost', async (req, res) => {
+router.get("/edit/:id", async (req, res) => {
   try {
-    res.render('new-post',{
-      layout:'dashboard',
+    const blogPostData = await Blogpost.findByPk(req.params.id);
+  } catch (error) {}
+});
+
+router.get("/newpost", async (req, res) => {
+  try {
+    res.render("new-post", {
+      layout: "dashboard",
     });
   } catch (error) {
-    res.status(500).json(error);
+    res.redirect("login");
   }
 });
 

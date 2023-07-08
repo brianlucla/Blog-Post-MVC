@@ -4,9 +4,9 @@ const { Blogpost } = require('../../models');
 router.post('/', async (req, res)=>{
   try {
     const blogPostData = await Blogpost.create({
-      blog_title:req.body.blog_title,
-      blog_content:req.body.blog_content,
-      user_id:req.session.userId,
+      blog_title: req.body.blog_title,
+      blog_content: req.body.blog_content,
+      user_id: req.session.userId,
     });
     res.json(blogPostData);
   } catch (error) {
@@ -17,7 +17,7 @@ router.post('/', async (req, res)=>{
 router.get("/:id", async (req, res) => {
   try {
     const blogPostData = await Blogpost.findbyPk({
-      where:{id:req.params.id}
+      where:{id:req.params.id},
     });
     res.json(blogPostData);
   } catch (error) {

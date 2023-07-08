@@ -1,10 +1,9 @@
 const userInput = document.getElementById('username');
 const passInput = document.getElementById('password');
-const submitEl = document.getElementById('submit-btn');
+const submitEl = document.getElementById('login-btn');
 
 const loginHandler = async function(event){
   event.preventDefault();
-
   const response = await fetch('/api/user/login', {
     method: 'POST',
     body: JSON.stringify({
@@ -22,3 +21,5 @@ const loginHandler = async function(event){
     alert('Login failed!');
   }
 }
+
+submitEl.addEventListener('click', loginHandler);

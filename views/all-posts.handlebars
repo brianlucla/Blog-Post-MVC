@@ -3,14 +3,14 @@
   <article class="card">
     <div class="card-header flex-row justify-space-between">
       <h2>
-        <a href="/post/{{id}}">{{title}}</a>
+        <a href="/blogpost/{{id}}">{{blog_title}}</a>
       </h2>
       <div>
         Posted by {{User.username}} on {{createdAt}}
       </div>
     </div>
     <div class="card-body">
-      {{body}}
+      {{blog_content}}
     </div>
   </article>
   {{/each}}
