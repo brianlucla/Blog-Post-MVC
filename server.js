@@ -4,6 +4,7 @@ const express = require("express");
 const { join } = require("path");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
+const helpers = require("./helpers/formatDate");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -27,7 +28,7 @@ app.use(
   })
 );
 
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");

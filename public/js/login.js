@@ -10,7 +10,7 @@ const loginHandler = async function(event){
       username: userInput.value,
       password: passInput.value,
     }),
-    header:{
+    headers:{
       'Content-Type':'application/json'
     },
   });

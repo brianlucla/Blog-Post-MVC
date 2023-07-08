@@ -16,9 +16,7 @@ router.post('/', async (req, res)=>{
 
 router.get("/:id", async (req, res) => {
   try {
-    const blogPostData = await Blogpost.findbyPk({
-      where:{id:req.params.id},
-    });
+    const blogPostData = await Blogpost.findByPk(req.params.id);
     res.json(blogPostData);
   } catch (error) {
     res.status(500).json(error);
@@ -27,10 +25,13 @@ router.get("/:id", async (req, res) => {
 
 router.put('/:id', async(req, res)=>{
   try {
-    const blogPostData = await Blogpost.update(
+    const [blogPostData] = await Blogpost.update(
       {blog_content: req.body.blog_content}, 
       {where:{id:req.params.id}},
-    )
+    );
+    if (blogPostData === 0){
+      res.status(404).json({message: 'Blog post not found!'});
+    }
   } catch (error) {
     res.status(500).json(error);
   }
@@ -41,6 +42,9 @@ router.delete('/:id', async(req, res)=>{
     const [blogPostData] = await Blogpost.destroy({
       where:{id:req.params.id},
     });
+    if (blogPostData ===0){
+      res.status(404).json({message:'Blog post not found!'});
+    }
   } catch (error) {
     res.status(500).json(error);
   }

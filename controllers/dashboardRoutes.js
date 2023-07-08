@@ -9,18 +9,22 @@ router.get("/", async (req, res) => {
       },
     });
     const blogs = blogPostData.map((blog) => {
-      blog.get({ plain: true });
+      return blog.get({ plain: true });
     });
     res.render("user-posts", { layout: "dashboard", blogs });
   } catch (error) {
-    res.redirect("login");
+    res.redirect('login');
   }
 });
 
 router.get("/edit/:id", async (req, res) => {
   try {
     const blogPostData = await Blogpost.findByPk(req.params.id);
-  } catch (error) {}
+    const blog = blogPostData.get({plain:true});
+    res.render('edit',{layout:'dashboard', blog});
+  } catch (error) {
+    res.redirect('login');
+  }
 });
 
 router.get("/newpost", async (req, res) => {
@@ -29,7 +33,7 @@ router.get("/newpost", async (req, res) => {
       layout: "dashboard",
     });
   } catch (error) {
-    res.redirect("login");
+    res.status(500).json(error);
   }
 });
 
